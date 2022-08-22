@@ -1,4 +1,19 @@
 # Complete Manifest Where in single yml we defined Deployment & Service for SpringApp & PVC(with default  StorageClass),ReplicaSet & Service For Mongo.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-hostpath
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/kube"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
