@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    name: pod
+spec:
+  containers:
+  - name: mypodcontainer
+    image: dockerhanson/java-wed-app
+    resources:
+      limits:
+        memory: "1024Mi"
+        cpu: "1024m"
+    ports:
+      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  type: LoadBalancer
+  selector:
+    app: pod
+  ports:
+  - port: 8080
+    targetPort: 8080
